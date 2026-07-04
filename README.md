@@ -54,6 +54,9 @@ Excel catalog ─┘       raw JSON,                Parquet/Delta,             o
                         partitioned by dt=        Glue Data Catalog         high-perf querying)
 ```
 
+#### High Level Architecture
+https://drive.google.com/file/d/1jX5v-3jCEcclovqdxZrz2kuTKqhP70_N/view?usp=sharing
+
 **Orchestration & monitoring layer** (runs alongside the data flow, not shown as a
 separate data path):
 
