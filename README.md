@@ -30,19 +30,10 @@ catalog, and produces a clean, query-ready dataset that answers two business que
 
 ```
 .
-├── ingest_song_catalog.py        # Bronze: snapshot the source Excel catalog
-├── ingest_api_spotify.py         # Bronze: search Spotify, land raw JSON
-├── ingest_api_youtube.py         # Bronze: search YouTube, land raw JSON
-├── check_api_connection.py       # Utility: verify API credentials before a full run
-├── transform_bronze_to_silver.py # Silver: parse, dedupe, validate, aggregate
+├── ingest_massive_music_technical_test # Bronze: snapshot the source Excel catalog, api spotify, and api youtube
+├── transform_massive_music_technical_test # Silver: parse, dedupe, validate, aggregate
 └── README.md
 ```
-
-Each `ingest_*` file is a self-contained Databricks notebook (source-format `.py`, with
-`# Databricks notebook source` / `# COMMAND ----------` cell markers) — no notebook
-depends on another via `%run`. This was a deliberate choice: duplicating a handful of
-small checkpoint helper functions across two notebooks is simpler to reason about and
-debug than a shared-module dependency, for a project this size.
 
 ---
 
@@ -99,7 +90,6 @@ exercise, and Databricks Delta tables were used as a directly analogous stand-in
 |---|---|
 | S3 bronze bucket | `workspace.bronze.*` Delta tables |
 | S3 silver bucket + Glue Catalog | `workspace.silver.*` Delta tables |
-| DynamoDB checkpoint table | `workspace.bronze.ingestion_state` Delta table |
 | Secrets Manager | Databricks secret scope (`dbutils.secrets.get(...)`) |
 | Glue ETL job | `transform_bronze_to_silver` notebook (PySpark) |
 | Step Functions / EventBridge | Manual/scheduled notebook runs (not yet automated) |
